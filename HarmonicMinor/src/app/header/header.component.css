@@ -8,7 +8,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 0px 10px 0px;
+    padding: 10px 0px 15px 0px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -43,14 +43,22 @@ nav {
     display: flex;
     align-items: center;
     gap: 20px;
-    color: white;
+    color: #FFFAFA;
+}
+
+nav a {
+    margin-right: 20px;
 }
 
 a {
     text-decoration: none;
-    color: white;
+    color: #FFFAFA;
     font: inherit;
-    cursor: pointer;
+    cursor: pointer
+}
+
+a:hover {
+    color: #00BFFF;
 }
 
 .dropdown {
@@ -67,38 +75,83 @@ a {
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    color: white;
+    color: #FFFAFA;
+    font: inherit;
 }
 
 .dropbtn:hover {
-    background-color: darkgray;
+    color: #00BFFF;
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #121212;
-    min-width: 200px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: #202020;
+    border: 2px solid rgb(218, 211, 211);
+    min-width: 300px;
+    box-shadow: 0px 8px 8px rgba(255, 255, 255, 0.4);
     z-index: 1;
-    border-radius: 5px;
+    left: -80px;
+    border-radius: 10px;
     overflow: hidden;
 }
 
 .dropdown-content a {
-    color: white;
-    padding: 12px 16px;
+    color: #FFFAFA;
+    padding: 12px 0px;
     text-decoration: none;
     display: block;
+    width: 100%;
+    text-align: center;
 }
 
 .dropdown-content a:hover {
     background-color: #343434;
+    color: #00BFFF;
 }
 
 /* Mostrar el contenido del dropdown cuando el botón o el dropdown esté enfocado */
 .dropdown:focus-within .dropdown-content, .dropdown:hover .dropdown-content {
     display: block;
+}
+
+.header-search {
+    position: relative;
+    display: none;
+}
+
+@media (min-width: 1024px) {
+    .header-search {
+        display: block;
+    }
+}
+
+.search-icon {
+    position: absolute;
+    left: 0.75rem;
+    top: 55%;
+    transform: translateY(-50%);
+    color: #FFFAFA;
+}
+
+.search-input {
+    width: 350px;
+    padding: 10px 10px 10px 30px;
+    background-color: #202020;
+    border: 1px solid #4A5568;
+    border-radius: 10px;
+    color: #FFFAFA;
+    font: inherit;
+}
+
+.search-input::placeholder {
+    color: #999997;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #00BFFF;
+    box-shadow: 2px 7px 7px rgba(255, 255, 255, 0.2);
 }
 
 .header-icons {
@@ -121,12 +174,11 @@ a {
 }
 
 .icon-button svg {
-    height: 20px;
-    width: 20px;
-    stroke: white;
+    height: 25px;
+    width: 25px;
+    stroke: #FFFAFA;
 }
 
-.icon-button:hover {
-    background-color: darkgray;
-    border-radius: 10px;
+.icon-button svg:hover {
+    stroke: #00BFFF;
 }
