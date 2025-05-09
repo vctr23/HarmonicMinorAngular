@@ -17,6 +17,18 @@ footer > div {
     margin: 10px;
 }
 
+@media (max-width: 768px) {
+    .footer-columns {
+        flex-direction: column; 
+        align-items: center; 
+    }
+
+    .footer-columns > div {
+        flex: 1 1 100%;
+        text-align: center; 
+    }
+}
+
 .footer-bottom {
     text-align: center;
     margin-top: 20px;
@@ -38,6 +50,7 @@ footer > div {
 }
 
 .footer-links li {
+    list-style: none;
     margin-bottom: 10px;
 }
 
@@ -57,21 +70,35 @@ footer > div {
 
 .social-links {
     display: flex;
-    width: 50px;
-    height: auto;
+    flex-direction: row;
     gap: 70px;
     margin-top: 30px;
     margin-left: 60px;
 }
 
 .social-link svg {
+    width: 30px;
+    height: auto;
     fill: #FFFAFA;
-    transition: fill 0.3s ease;
+    transition: fill 0.5s ease;
 }
 
 .social-link:hover svg {
     fill: #00BFFF;
 }
+
+@media (max-width: 768px) {
+    .social-links {
+        gap: 50px; 
+        margin-left: 55px;
+    }
+
+    .social-link svg {
+        width: 24px;
+        height: auto;
+    }
+}
+
 
 .footer-text {
     display: flex;

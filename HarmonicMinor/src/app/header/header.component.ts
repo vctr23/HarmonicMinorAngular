@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -8,4 +8,17 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent { 
+  isMobileMenuOpen: Boolean = false;
+
+  toggleMobileMenu(): void {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  @HostListener('document:click', ['$event'])
+  closeMobileMenu(event: Event): void {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.mobile-menu') && !target.closest('.mobile-menu-button')) {
+      this.isMobileMenuOpen = false;
+    }
+  }
 }
