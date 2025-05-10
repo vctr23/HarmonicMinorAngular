@@ -1,4 +1,4 @@
-header {
+.header-default {
     position: sticky;
     top: 0;
     left: 0;
@@ -10,6 +10,20 @@ header {
     justify-content: space-between;
     padding: 10px 0px 15px 0px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header-transparent {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0px 15px 0px;
+    backdrop-filter: blur(2px);
 }
 
 .header-logo {
@@ -42,6 +56,7 @@ header {
 nav {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 20px;
     color: #FFFAFA;
 }
@@ -202,12 +217,12 @@ a:hover {
 }
 
 .mobile-menu {
-    display: none; 
+    display: none;
     position: fixed;
     top: 80px;
     left: 0;
     width: 100%;
-    height: calc(100vh - 60px); 
+    height: calc(100vh - 60px);
     background-color: #1c1c1ce0;
     color: #FFFAFA;
     z-index: 99;
@@ -242,13 +257,13 @@ a:hover {
 
 @media (max-width: 1024px) {
     .mobile-menu-button {
-        display: block; 
+        display: block;
         margin-left: 1rem;
         margin-right: 3rem;
     }
 
     .header-centered {
-        display: none; 
+        display: none;
     }
 
     .logo {

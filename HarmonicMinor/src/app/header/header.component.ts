@@ -1,5 +1,5 @@
-import { Component, HostListener } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, HostListener} from '@angular/core';
+import { RouterLink, Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,8 +7,10 @@ import { RouterLink } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent { 
+export class HeaderComponent {
   isMobileMenuOpen: Boolean = false;
+
+  constructor(public router: Router) {}
 
   toggleMobileMenu(): void {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;

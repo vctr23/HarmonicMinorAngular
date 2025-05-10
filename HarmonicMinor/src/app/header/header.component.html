@@ -1,4 +1,4 @@
-<header>
+<header  [class.header-transparent]="router.url === '/'" class="header-default">
   <div class="header-logo">
     <button class="mobile-menu-button" aria-label="Toggle menu" (click)="toggleMobileMenu()">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
