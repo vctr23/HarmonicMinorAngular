@@ -1,0 +1,46 @@
+<div class="split-screen">
+    <div class="image-side">
+        <img src="images/register_image.jpg" alt="Login Image" class="image-overlay">
+        <div class="image-overlay"></div>
+    </div>
+    
+    <div class="form-side">
+        <div class="form-container">
+            <a routerLink="" class="logo">HarmonicMinor</a>
+
+            <div class="form-header">
+                <h1 class="form-title">Create an account</h1>
+                <p class="form-subtitle">Please enter your details to sign up</p>
+            </div>
+
+            <form (ngSubmit)="register()">
+                <div class="form-group">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" [(ngModel)]="username" name="username" id="username" class="form-input" placeholder="Enter your username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" [(ngModel)]="email" name="email" id="email" class="form-input" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" [(ngModel)]="password" name="password" id="password" class="form-input" placeholder="••••••••" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="passwordConfirm" class="form-label">Confirm Password</label>
+                    <input type="password" [(ngModel)]="passwordConfirm" name="passwordConfirm" id="passwordConfirm" class="form-input" placeholder="••••••••" required>
+                </div>
+
+                <p class="error-message">{{ errorMessage }}</p>
+                <button type="submit" class="btn btn-primary">Create account</button>
+            </form>
+
+            <div class="form-footer">
+                Already have an account? <a routerLink="/signin">Sign in</a>
+            </div>
+        </div>
+    </div>
+</div>

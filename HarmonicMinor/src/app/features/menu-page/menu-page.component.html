@@ -1,0 +1,231 @@
+<div class="profile-grid">
+    <div class="profile-card">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <img src="images/profile_img.png" alt="Foto de perfil">
+            </div>
+            <h2 class="profile-name">{{ username }}</h2>
+            <p class="profile-email">{{ email }}</p>
+        </div>
+        <div class="profile-body">
+            <div class="profile-section">
+                <h3 class="section-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    Personal information
+                </h3>
+                <div class="profile-info">
+                    <div class="info-item">
+                        <span class="info-label">Username</span>
+                        <span class="info-value">{{ username }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Email</span>
+                        <span class="info-value">{{ email }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Phone</span>
+                        <span class="info-value">{{ phone }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Location</span>
+                        <span class="info-value">{{ location }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-section">
+                <h3 class="section-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    Recent Activity
+                </h3>
+                <div class="profile-info">
+                    <div class="info-item">
+                        <span class="info-label">Session Duration:</span>
+                        <span class="info-value">{{ sessionDuration }}</span>
+                    </div>
+                </div>
+                <button class="btn logout-btn" (click)="logout()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="btn-icon">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    Sign Out
+                </button>
+                <p class="error-message">{{ errorMessage }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="settings-card">
+        <div class="settings-tabs">
+            <div class="tab-item" data-tab="profile" [class.active]="activeTab === 'profile'"
+                (click)="setActiveTab('profile')">Profile</div>
+            <div class="tab-item" data-tab="shipping" [class.active]="activeTab === 'shipping'"
+                (click)="setActiveTab('shipping')">Shipping Address</div>
+        </div>
+
+        <div class="tab-content">
+            <div class="tab-pane" [class.active]="activeTab === 'profile'" id="profile-tab">
+                <h3 class="section-title">Account settings</h3>
+                <div class="profile-links">
+                    <ng-container *ngIf="!editUserName; else editUsernameTmplt">
+                        <a (click)="onEditUserName()">Change username
+                            <svg xmlns="http://www.w3.org/2000/svg" height="14" width="8.75" viewBox="0 0 320 512">
+                                <path
+                                    d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
+                            </svg>
+                        </a>
+                    </ng-container>
+                    <ng-template #editUsernameTmplt>
+                        <div class="edit-username-container">
+                            <label for="newUserName" class="form-label" style="margin-top: 0.5rem;">Username</label>
+                            <input class="form-input" [(ngModel)]="newUserName" name="newUsername"
+                                style="max-width: 800px;">
+                            <button class="btn btn-primary" (click)="saveUserName()">Save</button>
+                            <button class="btn btn-outline" (click)="cancelEditUserName()">Cancel</button>
+                            <p class="error-message">{{ errorMessage }}</p>
+                        </div>
+                    </ng-template>
+                    <ng-container *ngIf="!editEmail; else editEmailTpl">
+                        <a (click)="onEditEmail()">Change email
+                            <svg xmlns="http://www.w3.org/2000/svg" height="14" width="8.75" viewBox="0 0 320 512">
+                                <path
+                                    d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
+                            </svg>
+                        </a>
+                    </ng-container>
+                    <ng-template #editEmailTpl>
+                        <div class="edit-email-container">
+                            <label for="newEmail" class="form-label" style="margin-top: 0.5rem;">Email</label>
+                            <input class="form-input" [(ngModel)]="newEmail" name="newEmail" type="email">
+                            <button class="btn btn-primary" (click)="saveEmail()">Save</button>
+                            <button class="btn btn-outline" (click)="cancelEditEmail()">Cancel</button>
+                            <p class="error-message">{{ errorMessage }}</p>
+                        </div>
+                    </ng-template>
+                    <a routerLink="/password-recovery">Change password
+                        <svg xmlns="http://www.w3.org/2000/svg" height="14" width="8.75" viewBox="0 0 320 512">
+                            <path
+                                d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
+                        </svg>
+                    </a>
+                </div>
+
+                <h3 class=" section-title">Privacy settings</h3>
+                <div class="profile-links">
+                    <a routerLink="/terms">Terms and conditions
+                        <svg xmlns="http://www.w3.org/2000/svg" height="14" width="8.75" viewBox="0 0 320 512">
+                            <path
+                                d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
+                        </svg></a>
+                    <a routerLink="/faqs">Frequently asked questions (FAQs)
+                        <svg xmlns="http://www.w3.org/2000/svg" height="14" width="8.75" viewBox="0 0 320 512">
+                            <path
+                                d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
+                        </svg></a>
+                    <a (click)="deleteUserAccount()" style="color: #e53e3e;">Delete account
+                        <svg xmlns="http://www.w3.org/2000/svg" height="14" width="8.75" viewBox="0 0 320 512">
+                            <path
+                                d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="tab-pane" [class.active]="activeTab === 'shipping'" id="shipping-tab">
+                <form>
+                    <div class="form-group">
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="ID" class="form-label">ID</label>
+                                <input type="text" id="ID" class="form-input" [(ngModel)]="id" name="id">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="first-name" class="form-label">Name*</label>
+                                <input type="text" id="first-name" class="form-input" [(ngModel)]="name" name="name"
+                                    required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="last-name" class="form-label">Last name/s*</label>
+                                <input type="text" id="last-name" class="form-input" [(ngModel)]="lastname"
+                                    name="lastname" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="street" class="form-label">Street name and number*</label>
+                        <input type="text" id="street" class="form-input" [(ngModel)]="street" name="street" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="postalCode" class="form-label">Postal Code*</label>
+                                <input type="text" id="postalCode" class="form-input" [(ngModel)]="postcode"
+                                    name="postalcode" required>
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="city" class="form-label">City/Town*</label>
+                                <input type="text" id="locality" class="form-input" [(ngModel)]="location"
+                                    name="location" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="country" class="form-label">Destination country*</label>
+                        <input type="text" id="country" class="form-input" [(ngModel)]="country" name="country"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone" class="form-label">Phone number</label>
+                        <input type="number" id="phone" class="form-input" [(ngModel)]="phone" name="phone">
+                    </div>
+
+
+                    <p class="info-label">* fields are required</p>
+                    <p class="error-message">{{ errorMessage }}</p>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" (click)="postUserAddressData()">
+                            <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z">
+                                </path>
+                                <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                                <polyline points="7 3 7 8 15 8"></polyline>
+                            </svg>
+                            Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

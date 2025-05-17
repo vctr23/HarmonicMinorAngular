@@ -36,6 +36,7 @@
     display: flex;
     align-items: center;
     text-decoration: none;
+    outline: none;
     cursor: pointer;
 }
 
@@ -94,6 +95,10 @@ a:hover {
     font: inherit;
 }
 
+.dropbtn svg {
+    margin-left: 5px;
+}
+
 .dropbtn:hover {
     color: #00BFFF;
 }
@@ -133,12 +138,6 @@ a:hover {
 .header-search {
     position: relative;
     display: none;
-}
-
-@media (min-width: 1140px) {
-    .header-search {
-        display: block;
-    }
 }
 
 .search-icon {
@@ -223,7 +222,7 @@ a:hover {
     left: 0;
     width: 100%;
     height: calc(100vh - 60px);
-    background-color: #1c1c1ce0;
+    background-color: #1c1c1cea;
     color: #FFFAFA;
     z-index: 99;
     overflow-y: auto;
@@ -272,4 +271,10 @@ a:hover {
         margin-right: 40px;
     }
 
+}
+
+@media (min-width: 1140px) {
+    .header-search {
+        display: block;
+    }
 }

@@ -17,18 +17,6 @@ footer > div {
     margin: 10px;
 }
 
-@media (max-width: 768px) {
-    .footer-columns {
-        flex-direction: column; 
-        align-items: center; 
-    }
-
-    .footer-columns > div {
-        flex: 1 1 100%;
-        text-align: center; 
-    }
-}
-
 .footer-bottom {
     text-align: center;
     margin-top: 20px;
@@ -87,7 +75,25 @@ footer > div {
     fill: #00BFFF;
 }
 
+.footer-text {
+    display: flex;
+    margin-top: 70px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
 @media (max-width: 768px) {
+    .footer-columns {
+        flex-direction: column; 
+        align-items: center; 
+    }
+
+    .footer-columns > div {
+        flex: 1 1 100%;
+        text-align: center; 
+    }
+
     .social-links {
         gap: 50px; 
         margin-left: 55px;
@@ -97,13 +103,4 @@ footer > div {
         width: 24px;
         height: auto;
     }
-}
-
-
-.footer-text {
-    display: flex;
-    margin-top: 70px;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
 }

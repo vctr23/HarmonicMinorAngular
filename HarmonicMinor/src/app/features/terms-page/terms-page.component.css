@@ -1,0 +1,245 @@
+body,
+.main-container {
+    background: #1c1c1c;
+}
+
+.page-header {
+    background: #1c1c1c;
+    color: #FFFAFA;
+}
+
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    background: #1c1c1c;
+    min-height: 100vh;
+}
+
+.terms-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 100vw;
+    background: #202020;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 24px 0 rgba(142, 84, 233, 0.10);
+    overflow: hidden;
+}
+
+.terms-nav {
+    min-width: 380px;
+    max-width: 500px;
+    background: #18181b;
+    padding: 2rem 1.5rem;
+    border-right: 1px solid #312e81;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.terms-nav-title {
+    color: #FFFAFA;
+    font-size: 1.5rem;
+}
+
+.terms-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.terms-nav-item {
+    margin-bottom: 0.5rem;
+}
+
+.terms-nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 0.375rem;
+    color: #FFFAFA;
+    text-decoration: none;
+    font-weight: 500;
+    box-sizing: border-box;
+}
+
+.terms-nav-link svg {
+    margin-left: auto;
+    display: block;
+    fill: #E4EDF1;
+    flex-shrink: 0;
+    height: 1rem;
+}
+
+.terms-nav-link.active,
+.terms-nav-link:hover {
+    background: linear-gradient(135deg, #4776E6, #8E54E9);
+    color: #FFFAFA;
+}
+
+.terms-content {
+    flex: 1;
+    padding: 3rem 3rem 2.5rem 3rem;
+    color: #FFFAFA;
+    background: transparent;
+    min-width: 0;
+    overflow-x: auto;
+}
+
+.terms-section {
+    margin-bottom: 2.5rem;
+}
+
+.terms-section:last-child {
+    margin-bottom: 0;
+}
+
+.terms-section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #8d54e9b9;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #333333;
+}
+
+.terms-section-subtitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 1.5rem 0 0.75rem;
+    color: #a78bfa;
+}
+
+.terms-text {
+    color: #E4EDF1;
+    margin-bottom: 1rem;
+    line-height: 1.7;
+}
+
+.terms-list {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.terms-list-item {
+    margin-bottom: 0.5rem;
+    color: #cbd5e1;
+}
+
+.terms-highlight {
+    background: #312e81;
+    border-left: 4px solid #8E54E9;
+    padding: 1rem 1.5rem;
+    border-radius: 0.375rem;
+    margin: 1.5rem 0;
+}
+
+.revision-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+    background: #232136;
+    color: #fff;
+}
+
+.revision-table th,
+.revision-table td {
+    border: 1px solid #312e81;
+    padding: 0.75rem 1rem;
+    text-align: left;
+}
+
+.revision-table th {
+    background-color: #2d2d2d;
+    font-weight: 600;
+    color: #F7FAFC;
+}
+
+.revision-table tr:last-child td {
+    border-bottom: none;
+}
+
+.revision-table tr:hover td {
+    background-color: #2d2d2d;
+}
+
+.terms-date {
+    margin-top: 2rem;
+    color: #a1a1aa;
+    font-size: 0.95rem;
+    text-align: right;
+}
+
+.terms-actions {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 1024px) {
+    .terms-container {
+        flex-direction: column;
+        max-width: 100vw;
+    }
+
+    .terms-nav {
+        max-width: 100vw;
+        min-width: 0;
+        border-right: none;
+        border-bottom: 1px solid #312e81;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 1rem 0.5rem;
+        justify-content: flex-start;
+        align-items: flex-start;
+        overflow-x: auto;
+    }
+
+    .terms-nav-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+        margin: 0 1rem;
+    }
+
+    .terms-nav-item {
+        margin-bottom: 0;
+    }
+
+    .terms-content {
+        padding: 1.5rem 1rem;
+        margin: 0 1rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .main-container {
+        padding: 0.5rem 0;
+    }
+
+    .terms-content {
+        padding: 1rem 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .terms-container {
+        border-radius: 0.25rem;
+    }
+
+    .terms-nav {
+        padding: 0.5rem 0.25rem;
+    }
+
+    .terms-content {
+        padding: 0.5rem 0.25rem;
+    }
+}

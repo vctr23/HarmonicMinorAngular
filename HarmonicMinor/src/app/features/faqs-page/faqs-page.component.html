@@ -1,0 +1,380 @@
+<div class="main-container">
+    <div class="page-header">
+        <h1 class="page-title">Frequently Asked Questions</h1>
+        <p class="page-subtitle">Find answers to the most common questions about our products and services.</p>
+    </div>
+
+    <div class="faq-container">
+        <nav class="faq-nav">
+            <div class="faq-nav-title">Categories</div>
+            <ul class="faq-nav-list">
+                <li class="faq-nav-item">
+                    <a href="#returns" class="faq-nav-link" [class.active]="activeSection === 'returns'"
+                        (click)="scrollToSection($event, 'returns')">Returns & Refunds</a>
+                </li>
+                <li class="faq-nav-item">
+                    <a href="#shipping" class="faq-nav-link" [class.active]="activeSection === 'shipping'"
+                        (click)="scrollToSection($event, 'shipping')">Shipping</a>
+                </li>
+                <li class="faq-nav-item">
+                    <a href="#products" class="faq-nav-link" [class.active]="activeSection === 'products'"
+                        (click)="scrollToSection($event, 'products')">Products & Services</a>
+                </li>
+                <li class="faq-nav-item">
+                    <a href="#contact" class="faq-nav-link" [class.active]="activeSection === 'contact'"
+                        (click)="scrollToSection($event, 'contact')">Contact & Support</a>
+                </li>
+                <li class="faq-nav-item">
+                    <a href="#warranty" class="faq-nav-link" [class.active]="activeSection === 'warranty'"
+                        (click)="scrollToSection($event, 'warranty')">Warranty</a>
+                </li>
+                <li class="faq-nav-item">
+                    <a href="#other" class="faq-nav-link" [class.active]="activeSection === 'other'"
+                        (click)="scrollToSection($event, 'other')">Other</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="faq-content">
+            <section id="returns" class="faq-section">
+                <div class="faq-section-header">
+                    <h2 class="faq-section-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                            <polyline points="1 4 1 10 7 10"></polyline>
+                            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                        </svg>Returns & Refunds
+                    </h2>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item" [class.active]="active === 0">
+                        <div class="faq-question" (click)="toggle(0)">
+                            <span class="faq-question-text">What is the return policy?</span>
+                            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="faq-answer" *ngIf="active === 0">
+                            <div class="faq-answer-content">
+                                <p>We accept returns within 14 days of delivery, as long as the item is unused, in its
+                                    original packaging, and in resalable condition. Proof of purchase is required.
+                                    Return shipping costs are the customer's responsibility unless the product is
+                                    defective or incorrect.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item" [class.active]="active === 1">
+                        <div class="faq-question" (click)="toggle(1)">
+                            <span class="faq-question-text">Are refunds available?</span>
+                            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="faq-answer" *ngIf="active === 1">
+                            <div class="faq-answer-content">
+                                <p>We offer refunds within 14 days after the item is returned, subject to an inspection
+                                    to ensure it meets our policies. Refunds are processed within 5 to 7 business days
+                                    after we receive the returned item.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item" [class.active]="active === 2">
+                        <div class="faq-question" (click)="toggle(2)">
+                            <span class="faq-question-text">Can I exchange an item?</span>
+                            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="faq-answer" *ngIf="active === 2">
+                            <div class="faq-answer-content">
+                                <p>Yes, exchanges are possible within 14 days of delivery if the item is unused and in
+                                    its original packaging. Please contact our support team to arrange an exchange.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="shipping" class="faq-section">
+                <div class="faq-section-header">
+                    <h2 class="faq-section-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="1" y="3" width="15" height="13"></rect>
+                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                            <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                            <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                        </svg>Shipping
+                    </h2>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item" [class.active]="active === 3">
+                        <div class="faq-question" (click)="toggle(3)">
+                            <span class="faq-question-text">How long does shipping take?</span>
+                            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="faq-answer" *ngIf="active === 3">
+                            <div class="faq-answer-content">
+                                <p>Shipping times depend on your location and the shipping method chosen during
+                                    purchase. While we strive to meet estimated delivery times, external factors like
+                                    customs delays or carrier issues may affect them.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item" [class.active]="active === 4">
+                        <div class="faq-question" (click)="toggle(4)">
+                            <span class="faq-question-text">What shipping options are available?</span>
+                            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="faq-answer" *ngIf="active === 4">
+                            <div class="faq-answer-content">
+                                <p>We offer several shipping options, including standard and express shipping, depending
+                                    on your location. Please check the available options during the purchase process for
+                                    details on costs and delivery times.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item" [class.active]="active === 5">
+                        <div class="faq-question" (click)="toggle(5)">
+                            <span class="faq-question-text">Do you ship internationally?</span>
+                            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="faq-answer" *ngIf="active === 5">
+                            <div class="faq-answer-content">
+                                <p>We currently ship to most countries in the European Union. For other destinations,
+                                    please contact our support team for a personalized quote.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="products" class="faq-section">
+                <div class="faq-section-header">
+                    <h2 class="faq-section-title"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <path d="M16 10a4 4 0 0 1-8 0"></path>
+                        </svg>Products & Services</h2>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item" [class.active]="active === 6">
+                        <div class="faq-question" (click)="toggle(6)">
+                            <span class="faq-question-text">Are there any discounts or coupons?</span>
+                            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="faq-answer" *ngIf="active === 6">
+                            <div class="faq-answer-content">
+                                <p>We occasionally offer discounts and coupons. We recommend subscribing to our
+                                    newsletter or following us on social media to stay updated on promotions and special
+                                    offers.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item" [class.active]="active === 7">
+                        <div class="faq-question" (click)="toggle(7)">
+                            <span class="faq-question-text">Do you offer instrument repair services?</span>
+                            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="faq-answer" *ngIf="active === 7">
+                            <div class="faq-answer-content">
+                                <p>Yes, we offer instrument repair services. Please contact us for more details
+                                    regarding costs, timelines, and service conditions.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item" [class.active]="active === 8">
+                        <div class="faq-question" (click)="toggle(8)">
+                            <span class="faq-question-text">Can I request a custom order?</span>
+                            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="faq-answer" *ngIf="active === 8">
+                            <div class="faq-answer-content">
+                                <p>Yes, we accept custom orders for certain products. Please reach out to our team with
+                                    your requirements and we will do our best to assist you.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="faq-section">
+                <div class="faq-section-header">
+                    <h2 class="faq-section-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                            class="btn-icon">
+                            <path
+                                d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                            </path>
+                        </svg>Contact & Support
+                    </h2>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item" [class.active]="active === 9">
+                        <div class="faq-question" (click)="toggle(9)">
+                            <span class="faq-question-text">How can I contact you?</span>
+                            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="faq-answer" *ngIf="active === 9">
+                            <div class="faq-answer-content">
+                                <p>You can contact us by sending an email to <a
+                                        href="mailto:hmsupport@harmonicminor-2025.firebaseapp.com">hmsupport&#64;harmonicminor-2025.firebaseapp.com</a>.
+                                    We will be happy to assist you with any questions or concerns.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item" [class.active]="active === 10">
+                        <div class="faq-question" (click)="toggle(10)">
+                            <span class="faq-question-text">Do you have a physical store?</span>
+                            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="faq-answer" *ngIf="active === 10">
+                            <div class="faq-answer-content">
+                                <p>We are currently an online-only store. All purchases and support are handled through
+                                    our website and customer service channels.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="warranty" class="faq-section">
+                <div class="faq-section-header">
+                    <h2 class="faq-section-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            <path d="M9 12l2 2 4-4"></path>
+                        </svg>
+                        Warranty
+                    </h2>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item" [class.active]="active === 11">
+                        <div class="faq-question" (click)="toggle(11)">
+                            <span class="faq-question-text">What warranties do you offer?</span>
+                            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="faq-answer" *ngIf="active === 11">
+                            <div class="faq-answer-content">
+                                <p>All our products include a standard manufacturer's warranty. The warranty does not
+                                    cover damage caused by misuse, negligence, or unauthorized modifications. Please
+                                    check the specific details included with the product or in our app.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item" [class.active]="active === 12">
+                        <div class="faq-question" (click)="toggle(12)">
+                            <span class="faq-question-text">How do I request a warranty repair?</span>
+                            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="faq-answer" *ngIf="active === 12">
+                            <div class="faq-answer-content">
+                                <p>To request a warranty repair, please contact our support team with your order details
+                                    and a description of the issue. We will guide you through the process.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="other" class="faq-section">
+                <div class="faq-section-header">
+                    <h2 class="faq-section-title"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                        </svg>Other</h2>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item" [class.active]="active === 13">
+                        <div class="faq-question" (click)="toggle(13)">
+                            <span class="faq-question-text">Give us your feedback!</span>
+                            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="faq-answer" *ngIf="active === 13">
+                            <div class="faq-answer-content">
+                                <p>Send us a message with your feedback or any doubts, we will try to solve any problems
+                                    as fast as possible.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item" [class.active]="active === 14">
+                        <div class="faq-question" (click)="toggle(14)">
+                            <span class="faq-question-text">Can I subscribe to your newsletter?</span>
+                            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="faq-answer" *ngIf="active === 14">
+                            <div class="faq-answer-content">
+                                <p>Yes! You can subscribe to our newsletter at the bottom of our homepage to receive
+                                    updates, news, and exclusive offers.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="contact-box">
+                <h3 class="contact-title">Didn't find the answer you were looking for?</h3>
+                <p class="contact-text">Our customer support team is available to help you with any questions or
+                    concerns you may have.</p>
+                <div class="contact-actions">
+                    <a routerLink="/contact" class="btn btn-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="btn-icon">
+                            <path
+                                d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                            </path>
+                        </svg>
+                        Contact us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
