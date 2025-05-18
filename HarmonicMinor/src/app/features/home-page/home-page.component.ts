@@ -3,6 +3,7 @@ import { UserService } from '../../core/services/user.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { combineLatest, map } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -16,7 +17,7 @@ export class HomePageComponent implements OnInit {
   loading: boolean = true;
 
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
     combineLatest([
@@ -30,7 +31,13 @@ export class HomePageComponent implements OnInit {
       this.userService.getSoftwareInstruments()
     ]).pipe(
       map(results => {
-        const all = results.flat();
+        const categories = [
+          'Guitars', 'Basses', 'Drums', 'Pianos',
+          'DJ', 'Microphones', 'Wind', 'Software'
+        ];
+        const all = results.flatMap((arr, index) =>
+          arr.map((inst: any) => ({ ...inst, category: categories[index] }))
+        );
 
         for (let i = all.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
@@ -61,5 +68,9 @@ export class HomePageComponent implements OnInit {
 
     const cleaned = price.replace(/[^\d.]/g, '');
     return cleaned ? parseFloat(cleaned) : null;
+  }
+
+  goToProduct(instrument: any) {
+    this.router.navigate(['/category', instrument.category, instrument.id]);
   }
 }

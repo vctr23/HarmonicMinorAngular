@@ -35,6 +35,7 @@ footer > div {
 .footer-links {
     text-align: center;
     padding: 0;
+    text-decoration: none;
 }
 
 .footer-links li {

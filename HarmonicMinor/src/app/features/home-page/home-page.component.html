@@ -26,11 +26,11 @@
                 <div class="product-image-container">
                     <img [src]="instrument.imageUrl" [alt]="instrument.name" class="product-image" priority>
                     <div class="product-overlay">
-                        <button class="btn btn-primary">View</button>
+                        <button class="btn btn-primary" (click)="goToProduct(instrument)">View</button>
                     </div>
                 </div>
                 <div class="product-content">
-                    <div class="product-category">{{ instrument.category || instrument.type }}</div>
+                    <div class="product-category">{{ instrument.type }}</div>
                     <h3 class="product-name">{{ instrument.name }}</h3>
                     <div class="product-footer">
                         <span class="product-price"> {{ priceToNumber(instrument.price) | currency:'EUR':'symbol':'1.0-0' }}</span>

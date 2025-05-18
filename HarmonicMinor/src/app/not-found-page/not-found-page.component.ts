@@ -11,6 +11,8 @@ export class NotFoundPageComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 }

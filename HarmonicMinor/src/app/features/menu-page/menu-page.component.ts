@@ -43,6 +43,10 @@ export class MenuPageComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     this.userService.getUserData().subscribe({
       next: (userData) => {
         if (userData) {

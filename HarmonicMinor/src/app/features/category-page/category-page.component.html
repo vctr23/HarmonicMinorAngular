@@ -1,0 +1,79 @@
+<div class="main-container">
+    <div class="page-header">
+        <h1 class="page-title">{{ categoryName }}</h1>
+        <p class="page-subtitle">Discover our selection of {{ categoryName }} from the best and most renown brands</p>
+    </div>
+    <div class="products-container">
+        <div class="products-header">
+            <div class="products-count">{{ instruments.length }} products</div>
+            <div class="products-sort">
+                <span class="sort-label">Order by:</span>
+                <select class="sort-select" [(ngModel)]="sortOption" (change)="sortInstruments()">
+                    <option value="relevance">Relevance</option>
+                    <option value="price-asc">Price: Low to high</option>
+                    <option value="price-desc">Precio: High to low</option>
+                </select>
+            </div>
+            <div class="view-options">
+                <div class="view-option" [class.active]="viewMode === 'grid'" (click)="setViewMode('grid')" id="gridView">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                </div>
+                <div class="view-option" [class.active]="viewMode === 'list'" (click)="setViewMode('list')" id="listView">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="8" y1="6" x2="21" y2="6"></line>
+                        <line x1="8" y1="12" x2="21" y2="12"></line>
+                        <line x1="8" y1="18" x2="21" y2="18"></line>
+                        <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                        <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                        <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div [ngClass]="{'products-grid': viewMode === 'grid', 'products-list': viewMode === 'list'}" id="productsGrid">
+            <div *ngIf="loading">Loading...</div>
+            <div *ngIf="!loading && instruments.length === 0">No {{ categoryName }} found.</div>
+            <div class="product-card" *ngFor="let instrument of instruments; let i = index">
+                <span class="product-badge badge-new" *ngIf="i < 2">New</span>
+                <button class="product-favorite" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                        </path>
+                    </svg>
+                </button>
+                <div class="product-image">
+                    <img [src]="instrument.thumbnailUrl || instrument.thumbNailUrl"
+                        [alt]="instrument.name">
+                </div>
+                <div class="product-info">
+                    <div class="product-brand">{{ instrument.manufacturer }}</div>
+                    <h3 class="product-name">{{ instrument.name }}</h3>
+                    <div class="product-price">
+                        <span class="current-price">{{ instrument.price }}</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn btn-primary">Add to cart</button>
+                        <button class="btn btn-icon" [routerLink]="['/category', categoryName, instrument.id]">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

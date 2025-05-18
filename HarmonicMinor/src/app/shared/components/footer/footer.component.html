@@ -1,4 +1,3 @@
-<!-- Footer -->
 <footer>
     <div class="footer-columns">
         <div>
@@ -40,24 +39,22 @@
         <div>
             <h3 class="footer-column-title">Shop</h3>
             <ul class="footer-links">
-                <li><a href="#" class="footer-link">Guitars</a></li>
-                <li><a href="#" class="footer-link">Basses</a></li>
-                <li><a href="#" class="footer-link">Pianos and keyboards</a></li>
-                <li><a href="#" class="footer-link">Drums and percussion</a></li>
-                <li><a href="#" class="footer-link">Wind instruments</a></li>
-                <li><a href="#" class="footer-link">DJ Equipment</a></li>
-                <li><a href="#" class="footer-link">Microphones and accessories</a></li>
-                <li><a href="#" class="footer-link">Software</a></li>
+                <li><a [routerLink]="['/category', 'Guitars']" class="footer-link">Guitars</a></li>
+                <li><a [routerLink]="['/category', 'Basses']" class="footer-link">Basses</a></li>
+                <li><a [routerLink]="['/category', 'Pianos']" class="footer-link">Pianos and keyboards</a></li>
+                <li><a [routerLink]="['/category', 'Drums']" class="footer-link">Drums and percussion</a></li>
+                <li><a [routerLink]="['/category', 'Winds']" class="footer-link">Wind instruments</a></li>
+                <li><a [routerLink]="['/category', 'Djs']" class="footer-link">DJ Equipment</a></li>
+                <li><a [routerLink]="['/category', 'Microphones']" class="footer-link">Microphones and accessories</a></li>
+                <li><a [routerLink]="['/category', 'Softwares']" class="footer-link">Software</a></li>
             </ul>
         </div>
         <div>
             <h3 class="footer-column-title">Support</h3>
             <ul class="footer-links">
-                <li><a href="#" class="footer-link">Contact Us</a></li>
-                <li><a href="#" class="footer-link">FAQs</a></li>
-                <li><a href="#" class="footer-link">Shipping</a></li>
-                <li><a href="#" class="footer-link">Returns</a></li>
-                <li><a href="#" class="footer-link">Warranty</a></li>
+                <li><a routerLink="/terms" class="footer-link">Terms and conditions</a></li>
+                <li><a routerLink="/faqs" class="footer-link">FAQs</a></li>
+                <li><a routerLink="/aa" class="footer-link">Contact us</a></li>
             </ul>
         </div>
         <div>

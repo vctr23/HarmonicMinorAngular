@@ -93,17 +93,16 @@
 .team-photo {
     width: 100%;
     height: 200px;
-    object-fit: cover;
+    object-fit: contain;
     background-color: #333333;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.team-photo svg {
-    width: 80px;
-    height: 80px;
-    color: #4A5568;
+.team-photo img {
+    width: 100%;
+    height: 200px;
 }
 
 .team-info {
@@ -114,17 +113,18 @@
     font-size: 1.125rem;
     font-weight: 600;
     margin-bottom: 0.25rem;
+    color: #FFFAFA;
 }
 
 .team-role {
     font-size: 0.875rem;
-    color: #B794F4;
+    color: #805AD5;
     margin-bottom: 0.75rem;
 }
 
 .team-bio {
     font-size: 0.875rem;
-    color: #A0AEC0;
+    color: #999997;
 }
 
 .team-social {
@@ -277,8 +277,8 @@
 }
 
 .store-image svg {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     color: #4A5568;
 }
 
@@ -290,17 +290,18 @@
     font-size: 1.125rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
+    color: #FFFAFA;
 }
 
 .store-address {
     font-size: 0.875rem;
-    color: #A0AEC0;
+    color: #999997;
     margin-bottom: 0.5rem;
 }
 
 .store-contact {
     font-size: 0.875rem;
-    color: #A0AEC0;
+    color: #999997;
 }
 
 .store-hours {
@@ -308,7 +309,7 @@
     padding-top: 0.5rem;
     border-top: 1px solid #333333;
     font-size: 0.875rem;
-    color: #A0AEC0;
+    color: #999997;
 }
 
 .cta-section {

@@ -116,5 +116,10 @@ export class UserService {
     const microphoneRef = collection(this.firestore, 'microphones');
     return collectionData(microphoneRef, {idField: 'id'});
   }
+
+  getInstrumentById(instrumentId: string, category: string): Observable<any> {
+    const instrumentRef = doc(this.firestore, `${category.toLowerCase()}/${instrumentId}`);
+    return docData(instrumentRef);
+  }
 }
 

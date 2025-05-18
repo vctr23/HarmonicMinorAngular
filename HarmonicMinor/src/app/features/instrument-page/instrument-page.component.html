@@ -1,0 +1,204 @@
+<div class="main-container" *ngIf="product">
+    <div class="product-container">
+        <div class="product-gallery">
+            <div class="main-image">
+                <img [src]="product.imageUrl" alt="Fender Player Stratocaster HSS">
+                <div class="gallery-controls">
+                    <div class="gallery-control">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </div>
+                    <div class="gallery-control">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="image-nav">
+                <div class="thumbnail active">
+                    <img [src]="product.thumbnailUrl || product.thumbNailUrl" [alt]="product.name">
+                </div>
+            </div>
+        </div>
+
+        <div class="product-info">
+            <div class="product-header">
+                <div class="product-brand">{{ product.manufacturer }}</div>
+                <h1 class="product-name">{{ product.name }}</h1>
+
+                <div class="product-price">
+                    <span class="current-price">{{ product.price }}</span>
+                </div>
+
+                <div class="product-availability">
+                    <div class="availability-status in-stock" *ngIf="product.stock > 0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                        {{ product.stock }} available
+                    </div>
+                    <div class="availability-status out-of-stock" *ngIf="product.stock == 0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="15" y1="9" x2="9" y2="15"></line>
+                            <line x1="9" y1="9" x2="15" y2="15"></line>
+                        </svg>
+                        Not on stock. Available soon.
+                    </div>
+                </div>
+
+                <div class="product-actions">
+                    <button class="btn btn-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            style="margin-right: 0.5rem;">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        Añadir al carrito
+                    </button>
+                    <button class="btn btn-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="product-meta">
+                    <div class="meta-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z">
+                            </path>
+                            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                        </svg>
+                        <span>Id: {{ product.id }}</span>
+                    </div>
+                    <div class="meta-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                            <path d="M2 17l10 5 10-5"></path>
+                            <path d="M2 12l10 5 10-5"></path>
+                        </svg>
+                        <span *ngIf="categoryName">Categories: {{ categoryName }}, {{ product.type }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-tabs">
+            <div class="tabs-header">
+                <div class="tab-btn active" data-tab="description" [class.active]="activeTab === 'description'"
+                    (click)="setActiveTab('description')">Description</div>
+                <div class="tab-btn" data-tab="specs" [class.active]="activeTab === 'shipping'"
+                    (click)="setActiveTab('shipping')">Shipping</div>
+            </div>
+
+            <div class="tab-content" [class.active]="activeTab === 'description'" id="description">
+                <h3>{{ product.name }}</h3>
+                <ul>
+                    <li *ngFor="let item of getDescriptionList(product.description['en'])">
+                        {{ item }}
+                    </li>
+                </ul>
+            </div>
+
+            <div class="tab-content" [class.active]="activeTab === 'shipping'" id="shipping">
+                <h3>Shipping & Returns</h3>
+                <p>At HarmonicMinor, we strive to provide fast and efficient shipping so you can enjoy your new guitar
+                    as soon as possible.</p>
+
+                <h3>Shipping</h3>
+                <ul>
+                    <li><strong>Standard shipping:</strong> 48-72 hours within mainland Spain (free on orders
+                        over €100)</li>
+                    <li><strong>Express shipping:</strong> Guaranteed 24h delivery (with additional cost)</li>
+                    <li><strong>Balearic Islands:</strong> 2–4 business days</li>
+                    <li><strong>Canary Islands, Ceuta, and Melilla:</strong> 4–7 business days (custom fees may apply)
+                    </li>
+                    <li><strong>Europe:</strong> 5-7 business days (custom fees may apply)</li>
+                </ul>
+
+                <p>All shipments include a tracking number so you can check the status of your order at any time.</p>
+
+                <h3>Returns</h3>
+                <p>You have 14 calendar days from the date of delivery to return the product if you are not satisfied
+                    with your purchase.</p>
+
+                <ul>
+                    <li>The product must be in perfect condition, with all accessories and original packaging.</li>
+                    <li>Return shipping costs are the customer's responsibility, except in cases of manufacturing
+                        defects.</li>
+                    <li>Once the product is received and its condition verified, we will issue a refund within a maximum
+                        of 14 days.</li>
+                </ul>
+
+                <h3>Warranty</h3>
+                <p>All our products come with a 2-year legal warranty against manufacturing defects.</p>
+                <p>In case of a defect, please contact our customer service team to initiate the warranty process.</p>
+                <p>You can read more about our policies at <a routerLink="/faqs" style="color:#8E54E9;">FAQs</a> or <a
+                        routerLink="/terms" style="color:#8E54E9;">Terms and conditions</a></p>
+                <p>If you have any questions related to shipping, returns, or warranty, feel free to contact our
+                    customer service team.</p>
+            </div>
+        </div>
+
+        <div class="related-products">
+            <div class="section-header">
+                <h2 class="section-title">Related products</h2>
+                <div class="section-actions">
+                    <button class="section-btn" (click)="prevRelated()" [disabled]="sliderIndex === 0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <button class="section-btn" (click)="nextRelated()"
+                        [disabled]="sliderIndex >= relatedProducts.length - sliderVisible">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="products-slider" #slider>
+                <div class="product-card" *ngFor="let relatedProduct of relatedProducts"
+                    (click)="goToProduct(relatedProduct.id)">
+                    <button class="product-favorite">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                            </path>
+                        </svg>
+                    </button>
+                    <div class="product-image">
+                        <img [src]="relatedProduct.thumbnailUrl || relatedProduct.thumbNailUrl"
+                            [alt]="relatedProduct.name">
+                    </div>
+                    <div class="product-card-info">
+                        <div class="product-card-brand">{{ relatedProduct.manufacturer }}</div>
+                        <h3 class="product-card-name">{{ relatedProduct.name }}</h3>
+                        <div class="product-card-price">
+                            <span class="current-price">{{ relatedProduct.price }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

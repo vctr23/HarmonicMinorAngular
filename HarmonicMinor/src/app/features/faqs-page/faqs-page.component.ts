@@ -10,15 +10,17 @@ import { RouterLink } from '@angular/router';
   templateUrl: './faqs-page.component.html',
   styleUrl: './faqs-page.component.css'
 })
-export class FAQsPageComponent implements OnInit{
+export class FAQsPageComponent implements OnInit {
   active: number | null = null;
   activeSection: string = 'returns';
   searchTerm: string = '';
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
+    if (typeof window !== 'undefined') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 
   toggle(index: number) {

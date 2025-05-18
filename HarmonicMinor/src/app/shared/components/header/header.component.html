@@ -1,4 +1,5 @@
-<header  [class.header-transparent]="router.url === '/' || router.url === '/signin' || router.url === '/signup'" class="header-default">
+<header [class.header-transparent]="router.url === '/' || router.url === '/signin' || router.url === '/signup'"
+  class="header-default">
   <div class="header-logo">
     <button class="mobile-menu-button" aria-label="Toggle menu" (click)="toggleMobileMenu()">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -15,7 +16,7 @@
   <div class="header-centered">
     <nav>
       <div class="dropdown">
-        <button class="dropbtn">Categories 
+        <button class="dropbtn">Categories
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down"
             viewBox="0 0 16 16">
             <path fill-rule="evenodd"
@@ -23,14 +24,14 @@
           </svg>
         </button>
         <div class="dropdown-content">
-          <a>Guitars</a>
-          <a>Basses</a>
-          <a>Pianos and keyboards</a>
-          <a>Drums and percussion</a>
-          <a>Wind instruments</a>
-          <a>DJ Equipment</a>
-          <a>Microphones and accessories</a>
-          <a>Software</a>
+          <a [routerLink]="['/category', 'Guitars']">Guitars</a>
+          <a [routerLink]="['/category', 'Basses']">Basses</a>
+          <a [routerLink]="['/category', 'Pianos']">Pianos and keyboards</a>
+          <a [routerLink]="['/category', 'Drums']">Drums and percussion</a>
+          <a [routerLink]="['/category', 'Winds']">Wind instruments</a>
+          <a [routerLink]="['/category', 'Djs']">DJ Equipment</a>
+          <a [routerLink]="['/category', 'Microphones']">Microphones and accessories</a>
+          <a [routerLink]="['/category', 'Softwares']">Software</a>
         </div>
       </div>
       <a routerLink="/community" routerLinkActive="active">Videos</a>
@@ -91,14 +92,14 @@
     <div>
       <h3 class="mobile-nav-link">Categories</h3>
       <div class="mobile-categories">
-        <a>Guitars</a>
-        <a>Basses</a>
-        <a>Pianos and keyboards</a>
-        <a>Drums and percussion</a>
-        <a>Wind instruments</a>
-        <a>DJ Equipment</a>
-        <a>Microphones and accessories</a>
-        <a>Software</a>
+        <a [routerLink]="['/category', 'Guitars']">Guitars</a>
+        <a [routerLink]="['/category', 'Basses']">Basses</a>
+        <a [routerLink]="['/category', 'Pianos']">Pianos and keyboards</a>
+        <a [routerLink]="['/category', 'Drums']">Drums and percussion</a>
+        <a [routerLink]="['/category', 'Winds']">Wind instruments</a>
+        <a [routerLink]="['/category', 'Djs']">DJ Equipment</a>
+        <a [routerLink]="['/category', 'Microphones']">Microphones and accessories</a>
+        <a [routerLink]="['/category', 'Softwares']">Software</a>
       </div>
     </div>
     <a routerLink="/community" routerLinkActive="active">Videos</a>

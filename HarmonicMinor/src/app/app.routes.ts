@@ -10,6 +10,8 @@ import { TermsPageComponent } from './features/terms-page/terms-page.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { FAQsPageComponent } from './features/faqs-page/faqs-page.component';
 import { AboutUsPageComponent } from './features/about-us-page/about-us-page.component';
+import { CategoryPageComponent } from './features/category-page/category-page.component';
+import { InstrumentPageComponent } from './features/instrument-page/instrument-page.component';
 
 export const routes: Routes = [
     { path: '', component: LandingPageComponent },
@@ -21,5 +23,7 @@ export const routes: Routes = [
     { path: 'terms', component: TermsPageComponent },
     { path: 'faqs', component: FAQsPageComponent },
     { path: 'about-us', component: AboutUsPageComponent },
+    { path: 'category/:categoryName', component: CategoryPageComponent },
+    { path: 'category/:categoryName/:instrumentId', component: InstrumentPageComponent },
     { path: '**', component: NotFoundPageComponent }
 ];

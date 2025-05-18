@@ -11,7 +11,9 @@ export class TermsPageComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    if (typeof window !== 'undefined') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 
   scrollToSection(event: Event, sectionId: string) {
