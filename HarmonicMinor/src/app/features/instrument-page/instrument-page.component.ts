@@ -3,6 +3,8 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { UserService } from '../../core/services/user.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ProductService } from '../../core/services/product.service';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-instrument-page',
@@ -18,18 +20,23 @@ export class InstrumentPageComponent implements OnInit {
   loading: boolean = true;
   activeTab: string = 'description';
   relatedProducts: any[] = [];
+  favourites: any = {};
   sliderIndex: number = 0;
   sliderVisible = 3
 
-  constructor(private route: ActivatedRoute, private userService: UserService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private productService: ProductService, private userService: UserService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     this.route.paramMap.subscribe(params => {
       const id = params.get('instrumentId');
       this.categoryName = params.get('categoryName');
       if (id && this.categoryName) {
         this.loading = true;
-        this.userService.getInstrumentById(id, this.categoryName).subscribe(instrument => {
+        this.productService.getInstrumentById(id, this.categoryName).subscribe(instrument => {
           this.product = instrument;
           this.loading = false;
         })
@@ -42,7 +49,7 @@ export class InstrumentPageComponent implements OnInit {
         switch (this.categoryName) {
           case 'Guitars':
             this.categoryName = 'Guitars';
-            this.userService.getGuitarInstruments().subscribe((allGuitars: any[]) => {
+            this.productService.getGuitarInstruments().subscribe((allGuitars: any[]) => {
               const filtered = allGuitars.filter(inst => inst.id !== this.product.id);
               for (let i = filtered.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -53,7 +60,7 @@ export class InstrumentPageComponent implements OnInit {
             break;
           case 'Basses':
             this.categoryName = 'Basses';
-            this.userService.getBassInstruments().subscribe((allBasses: any[]) => {
+            this.productService.getBassInstruments().subscribe((allBasses: any[]) => {
               const filtered = allBasses.filter(inst => inst.id !== this.product.id);
               for (let i = filtered.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -64,7 +71,7 @@ export class InstrumentPageComponent implements OnInit {
             break;
           case 'Pianos':
             this.categoryName = 'Pianos';
-            this.userService.getPianoInstruments().subscribe((allPianos: any[]) => {
+            this.productService.getPianoInstruments().subscribe((allPianos: any[]) => {
               const filtered = allPianos.filter(inst => inst.id !== this.product.id);
               for (let i = filtered.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -75,7 +82,7 @@ export class InstrumentPageComponent implements OnInit {
             break;
           case 'Drums':
             this.categoryName = 'Drums';
-            this.userService.getDrumInstruments().subscribe((allDrums: any[]) => {
+            this.productService.getDrumInstruments().subscribe((allDrums: any[]) => {
               const filtered = allDrums.filter(inst => inst.id !== this.product.id);
               for (let i = filtered.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -86,7 +93,7 @@ export class InstrumentPageComponent implements OnInit {
             break;
           case 'Winds':
             this.categoryName = 'Winds';
-            this.userService.getWindInstruments().subscribe((allWinds: any[]) => {
+            this.productService.getWindInstruments().subscribe((allWinds: any[]) => {
               const filtered = allWinds.filter(inst => inst.id !== this.product.id);
               for (let i = filtered.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -97,7 +104,7 @@ export class InstrumentPageComponent implements OnInit {
             break;
           case 'Djs':
             this.categoryName = 'Djs';
-            this.userService.getDjInstruments().subscribe((allDjs: any[]) => {
+            this.productService.getDjInstruments().subscribe((allDjs: any[]) => {
               const filtered = allDjs.filter(inst => inst.id !== this.product.id);
               for (let i = filtered.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -108,7 +115,7 @@ export class InstrumentPageComponent implements OnInit {
             break;
           case 'Softwares':
             this.categoryName = 'Softwares';
-            this.userService.getSoftwareInstruments().subscribe((allSoftwares: any[]) => {
+            this.productService.getSoftwareInstruments().subscribe((allSoftwares: any[]) => {
               const filtered = allSoftwares.filter(inst => inst.id !== this.product.id);
               for (let i = filtered.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -119,7 +126,7 @@ export class InstrumentPageComponent implements OnInit {
             break;
           case 'Microphones':
             this.categoryName = 'Microphones';
-            this.userService.getMicrophoneInstruments().subscribe((allMicrophones: any[]) => {
+            this.productService.getMicrophoneInstruments().subscribe((allMicrophones: any[]) => {
               const filtered = allMicrophones.filter(inst => inst.id !== this.product.id);
               for (let i = filtered.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -132,8 +139,18 @@ export class InstrumentPageComponent implements OnInit {
             this.relatedProducts = [];
         }
       }
-    })
+    });
+
+    this.authService.currentUser$.subscribe(user => {
+      if (user) {
+        this.userService.getFavourites().subscribe(user => {
+          this.favourites = user?.['favourites'] || {};
+        });
+      }
+    });
   }
+
+
 
   setActiveTab(tab: string): void {
     this.activeTab = tab;
@@ -171,5 +188,18 @@ export class InstrumentPageComponent implements OnInit {
       .split('•')
       .map(item => item.trim())
       .filter(item => item.length > 0);
+  }
+
+  isFavourite(category: string, id: string): boolean {
+    return !!this.favourites[category]?.[id];
+  }
+
+  toggleFavourite(category: string, id: string, event: Event) {
+    event.stopPropagation();
+    if (this.isFavourite(category, id)) {
+      this.userService.removeFromFavourites(category, id);
+    } else {
+      this.userService.addToFavourites(category, id);
+    }
   }
 }

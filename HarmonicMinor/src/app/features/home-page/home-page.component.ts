@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { combineLatest, map } from 'rxjs';
 import { Router } from '@angular/router';
+import { ProductService } from '../../core/services/product.service';
 
 @Component({
   selector: 'app-home-page',
@@ -17,23 +18,23 @@ export class HomePageComponent implements OnInit {
   loading: boolean = true;
 
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private router: Router, private productService: ProductService) { }
 
   ngOnInit(): void {
     combineLatest([
-      this.userService.getGuitarInstruments(),
-      this.userService.getBassInstruments(),
-      this.userService.getDrumInstruments(),
-      this.userService.getPianoInstruments(),
-      this.userService.getDjInstruments(),
-      this.userService.getMicrophoneInstruments(),
-      this.userService.getWindInstruments(),
-      this.userService.getSoftwareInstruments()
+      this.productService.getGuitarInstruments(),
+      this.productService.getBassInstruments(),
+      this.productService.getDrumInstruments(),
+      this.productService.getPianoInstruments(),
+      this.productService.getDjInstruments(),
+      this.productService.getMicrophoneInstruments(),
+      this.productService.getWindInstruments(),
+      this.productService.getSoftwareInstruments()
     ]).pipe(
       map(results => {
         const categories = [
           'Guitars', 'Basses', 'Drums', 'Pianos',
-          'DJ', 'Microphones', 'Wind', 'Software'
+          'Djs', 'Microphones', 'Winds', 'Softwares'
         ];
         const all = results.flatMap((arr, index) =>
           arr.map((inst: any) => ({ ...inst, category: categories[index] }))
@@ -48,12 +49,10 @@ export class HomePageComponent implements OnInit {
       })
     ).subscribe({
       next: (instruments) => {
-        console.log('Instrumentos cargados:', instruments);
         this.instruments = instruments;
         this.loading = false;
       },
       error: (err) => {
-        console.error('Error cargando instrumentos:', err);
         this.instruments = [];
         this.loading = false;
       }

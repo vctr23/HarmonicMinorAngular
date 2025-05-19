@@ -303,6 +303,10 @@
     text-align: right;
 }
 
+.products-list .btn-icon {
+    width: 5rem;
+}
+
 @media (max-width: 768px) {
     .product-list-item {
         grid-template-columns: 120px 1fr;

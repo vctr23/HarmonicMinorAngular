@@ -205,11 +205,16 @@
 
 .btn-icon:hover {
     background-color: #333333;
-    color: #F7FAFC;
+    color: #E4EDF1;
 }
 
 .btn-icon.active {
     color: #E53E3E;
+    border-color: #E53E3E;
+}
+
+.btn-icon.active svg {
+    stroke: #E53E3E;
 }
 
 .product-meta {
@@ -377,11 +382,6 @@
 
 .badge-new {
     background-color: #805AD5;
-    color: #F7FAFC;
-}
-
-.badge-sale {
-    background-color: #E53E3E;
     color: #F7FAFC;
 }
 

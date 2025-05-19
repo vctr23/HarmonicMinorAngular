@@ -15,7 +15,8 @@
                 </select>
             </div>
             <div class="view-options">
-                <div class="view-option" [class.active]="viewMode === 'grid'" (click)="setViewMode('grid')" id="gridView">
+                <div class="view-option" [class.active]="viewMode === 'grid'" (click)="setViewMode('grid')"
+                    id="gridView">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="3" y="3" width="7" height="7"></rect>
@@ -24,7 +25,8 @@
                         <rect x="3" y="14" width="7" height="7"></rect>
                     </svg>
                 </div>
-                <div class="view-option" [class.active]="viewMode === 'list'" (click)="setViewMode('list')" id="listView">
+                <div class="view-option" [class.active]="viewMode === 'list'" (click)="setViewMode('list')"
+                    id="listView">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="8" y1="6" x2="21" y2="6"></line>
@@ -43,7 +45,8 @@
             <div *ngIf="!loading && instruments.length === 0">No {{ categoryName }} found.</div>
             <div class="product-card" *ngFor="let instrument of instruments; let i = index">
                 <span class="product-badge badge-new" *ngIf="i < 2">New</span>
-                <button class="product-favorite" >
+                <button class="product-favorite" [class.active]="isFavourite(categoryName, instrument.id)"
+                    (click)="toggleFavourite(categoryName, instrument.id, $event)">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path
@@ -52,8 +55,7 @@
                     </svg>
                 </button>
                 <div class="product-image">
-                    <img [src]="instrument.thumbnailUrl || instrument.thumbNailUrl"
-                        [alt]="instrument.name">
+                    <img [src]="instrument.thumbnailUrl || instrument.thumbNailUrl" [alt]="instrument.name">
                 </div>
                 <div class="product-info">
                     <div class="product-brand">{{ instrument.manufacturer }}</div>

@@ -3,6 +3,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { UserService } from '../../core/services/user.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ProductService } from '../../core/services/product.service';
 
 @Component({
   selector: 'app-category-page',
@@ -15,12 +16,13 @@ export class CategoryPageComponent implements OnInit {
   loading: boolean = true;
   instruments: any[] = [];
   originalOrder: any[] = [];
+  favourites: any = {};
 
   viewMode: 'grid' | 'list' = 'grid';
   sortOption: string = 'relevance';
 
 
-  constructor(private route: ActivatedRoute, private userService: UserService) { }
+  constructor(private route: ActivatedRoute, private productService: ProductService, private userService: UserService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -32,40 +34,44 @@ export class CategoryPageComponent implements OnInit {
       switch (this.categoryName) {
         case 'Guitars':
           this.categoryName = 'Guitars';
-          this.userService.getGuitarInstruments().subscribe(this.handleInstruments());
+          this.productService.getGuitarInstruments().subscribe(this.handleInstruments());
           break;
         case 'Basses':
           this.categoryName = 'Basses';
-          this.userService.getBassInstruments().subscribe(this.handleInstruments());
+          this.productService.getBassInstruments().subscribe(this.handleInstruments());
           break;
         case 'Pianos':
           this.categoryName = 'Pianos';
-          this.userService.getPianoInstruments().subscribe(this.handleInstruments());
+          this.productService.getPianoInstruments().subscribe(this.handleInstruments());
           break;
         case 'Drums':
           this.categoryName = 'Drums';
-          this.userService.getDrumInstruments().subscribe(this.handleInstruments());
+          this.productService.getDrumInstruments().subscribe(this.handleInstruments());
           break;
         case 'Winds':
           this.categoryName = 'Winds';
-          this.userService.getWindInstruments().subscribe(this.handleInstruments());
+          this.productService.getWindInstruments().subscribe(this.handleInstruments());
           break;
         case 'Djs':
           this.categoryName = 'Djs';
-          this.userService.getDjInstruments().subscribe(this.handleInstruments());
+          this.productService.getDjInstruments().subscribe(this.handleInstruments());
           break;
         case 'Softwares':
           this.categoryName = 'Softwares';
-          this.userService.getSoftwareInstruments().subscribe(this.handleInstruments());
+          this.productService.getSoftwareInstruments().subscribe(this.handleInstruments());
           break;
         case 'Microphones':
           this.categoryName = 'Microphones';
-          this.userService.getMicrophoneInstruments().subscribe(this.handleInstruments());
+          this.productService.getMicrophoneInstruments().subscribe(this.handleInstruments());
           break;
         default:
           this.instruments = [];
           this.loading = false;
       }
+    });
+
+    this.userService.getFavourites().subscribe((user: any) => {
+      this.favourites = user?.favourites || {};
     });
   }
 
@@ -108,5 +114,18 @@ export class CategoryPageComponent implements OnInit {
 
     const cleaned = price.replace(/[^\d.]/g, '');
     return cleaned ? parseFloat(cleaned) : null;
+  }
+
+  isFavourite(category: string, id: string): boolean {
+    return !!this.favourites[category]?.[id];
+  }
+
+  toggleFavourite(category: string, id: string, event: Event) {
+    event.stopPropagation();
+    if (this.isFavourite(category, id)) {
+      this.userService.removeFromFavourites(category, id);
+    } else {
+      this.userService.addToFavourites(category, id);
+    }
   }
 }

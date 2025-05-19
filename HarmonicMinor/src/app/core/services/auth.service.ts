@@ -10,7 +10,6 @@ export class AuthService {
   private currentUserSubject = new BehaviorSubject<User | null>(null);
 
   constructor(public auth: Auth, private firestore: Firestore) {
-    // Expect changes in the authentication state
     onAuthStateChanged(this.auth, (user) => {
       this.currentUserSubject.next(user);
     });
@@ -46,12 +45,10 @@ export class AuthService {
     );
   }
 
-  // Observable to get the current user
   get currentUser$(): Observable<User | null> {
     return this.currentUserSubject.asObservable();
   }
 
-  // Synchronous access to the current user
   get currentUser(): User | null {
     return this.currentUserSubject.value;
   }

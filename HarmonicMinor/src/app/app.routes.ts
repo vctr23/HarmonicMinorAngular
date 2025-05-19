@@ -12,6 +12,7 @@ import { FAQsPageComponent } from './features/faqs-page/faqs-page.component';
 import { AboutUsPageComponent } from './features/about-us-page/about-us-page.component';
 import { CategoryPageComponent } from './features/category-page/category-page.component';
 import { InstrumentPageComponent } from './features/instrument-page/instrument-page.component';
+import { FavouritesPageComponent } from './features/favourites-page/favourites-page.component';
 
 export const routes: Routes = [
     { path: '', component: LandingPageComponent },
@@ -25,5 +26,6 @@ export const routes: Routes = [
     { path: 'about-us', component: AboutUsPageComponent },
     { path: 'category/:categoryName', component: CategoryPageComponent },
     { path: 'category/:categoryName/:instrumentId', component: InstrumentPageComponent },
+    { path: 'favourites', component: FavouritesPageComponent},
     { path: '**', component: NotFoundPageComponent }
 ];
