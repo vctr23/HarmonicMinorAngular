@@ -64,7 +64,7 @@
                         <span class="current-price">{{ instrument.price }}</span>
                     </div>
                     <div class="product-actions">
-                        <button class="btn btn-primary">Add to cart</button>
+                        <button class="btn btn-primary" (click)="addToCart(categoryName, instrument.id, $event)">Add to cart</button>
                         <button class="btn btn-icon" [routerLink]="['/category', categoryName, instrument.id]">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

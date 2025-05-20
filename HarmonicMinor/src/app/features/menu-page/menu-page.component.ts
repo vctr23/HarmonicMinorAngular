@@ -18,7 +18,7 @@ export class MenuPageComponent implements OnInit {
   username: string = '';
   email: string = '';
   // Address data
-  location: string = '';
+  locality: string = '';
   phone: string = '';
   id: string = '';
   country: string = '';
@@ -77,7 +77,7 @@ export class MenuPageComponent implements OnInit {
           this.lastname = userAddressData.lastname || '';
           this.postcode = userAddressData.postcode || '';
           this.street = userAddressData.street || '';
-          this.location = userAddressData.locality || '';
+          this.locality = userAddressData.locality || '';
           this.phone = userAddressData.phone || '';
           this.errorMessageAddress = '';
         } else {
@@ -86,14 +86,14 @@ export class MenuPageComponent implements OnInit {
       },
       error: (err) => {
         this.errorMessageAddress = 'Error while retrieving user address data:' + err;
-        this.location = 'Location';
-        this.phone = 'Phone';
-        this.id = 'id';
-        this.country = 'country';
-        this.name = 'name';
-        this.lastname = 'lastName';
-        this.postcode = 'postalCode';
-        this.street = 'street';
+        this.locality = '';
+        this.phone = '';
+        this.id = '';
+        this.country = '';
+        this.name = '';
+        this.lastname = '';
+        this.postcode = '';
+        this.street = '';
       }
     })
 
@@ -121,7 +121,7 @@ export class MenuPageComponent implements OnInit {
       lastname: this.lastname,
       postcode: this.postcode,
       street: this.street,
-      locality: this.location,
+      locality: this.locality,
       phone: this.phone
     };
 

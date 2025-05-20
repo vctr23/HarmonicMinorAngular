@@ -4,6 +4,7 @@ import { UserService } from '../../core/services/user.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../core/services/product.service';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-category-page',
@@ -17,12 +18,13 @@ export class CategoryPageComponent implements OnInit {
   instruments: any[] = [];
   originalOrder: any[] = [];
   favourites: any = {};
+  cart: any = {};
 
   viewMode: 'grid' | 'list' = 'grid';
   sortOption: string = 'relevance';
 
 
-  constructor(private route: ActivatedRoute, private productService: ProductService, private userService: UserService) { }
+  constructor(private route: ActivatedRoute, private productService: ProductService, private userService: UserService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -70,9 +72,13 @@ export class CategoryPageComponent implements OnInit {
       }
     });
 
-    this.userService.getFavourites().subscribe((user: any) => {
-      this.favourites = user?.favourites || {};
-    });
+    this.authService.currentUser$.subscribe(user => {
+      if (user) {
+        this.userService.getFavourites().subscribe((user: any) => {
+          this.favourites = user?.favorites || {};
+        });
+      }
+    })
   }
 
   private handleInstruments() {
@@ -127,5 +133,10 @@ export class CategoryPageComponent implements OnInit {
     } else {
       this.userService.addToFavourites(category, id);
     }
+  }
+
+  addToCart(category: string, id: string, event: Event) {
+    event.stopPropagation();
+    this.userService.addToCart(category, id);
   }
 }

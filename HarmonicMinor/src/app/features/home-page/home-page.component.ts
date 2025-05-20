@@ -21,6 +21,10 @@ export class HomePageComponent implements OnInit {
   constructor(private router: Router, private productService: ProductService) { }
 
   ngOnInit(): void {
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     combineLatest([
       this.productService.getGuitarInstruments(),
       this.productService.getBassInstruments(),

@@ -10,9 +10,9 @@
                             d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
                         </path>
                     </svg>
-                    Mis Favoritos
+                    My Favourites
                 </h1>
-                <p class="page-subtitle">Gestiona tus productos favoritos</p>
+                <p class="page-subtitle">Manage your favourite products</p>
             </div>
         </div>
 
@@ -24,29 +24,29 @@
                         d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
                     </path>
                 </svg>
-                <span>{{ favouriteProducts.length }} productos en tu lista de favoritos</span>
+                <span>{{ favouriteProducts.length }} products in your favourites</span>
             </div>
             <div class="list-actions">
-                <button class="action-btn danger">
+                <button class="action-btn danger" (click)="removeAllFavourites()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="3 6 5 6 21 6"></polyline>
                         <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
                     </svg>
-                    Eliminar todo
+                    Clear all
                 </button>
             </div>
         </div>
 
         <div class="filters-container">
             <div class="sort-container">
-                <span class="sort-label">Ordenar por:</span>
-                <select class="sort-select">
-                    <option value="default">Predeterminado</option>
-                    <option value="price-asc">Precio: Menor a Mayor</option>
-                    <option value="price-desc">Precio: Mayor a Menor</option>
-                    <option value="name-asc">Nombre: A-Z</option>
-                    <option value="name-desc">Nombre: Z-A</option>
+                <span class="sort-label">Order by:</span>
+                <select class="sort-select" [(ngModel)]="sortOption" (change)="sortFavourites()">
+                    <option value="default">Default</option>
+                    <option value="price-asc">Price: Low to High</option>
+                    <option value="price-desc">Price: High to low</option>
+                    <option value="name-asc">Name: a-z</option>
+                    <option value="name-desc">Name a-z</option>
                 </select>
             </div>
             <div class="view-options">
@@ -75,8 +75,9 @@
             </div>
         </div>
 
-        <div [ngClass]="{'favorites-grid': viewMode === 'grid', 'favorites-list': viewMode === 'list'}" id="favoritesGrid">
-            <div class="product-card" *ngFor="let product of favouriteProducts">
+        <div [ngClass]="{'favorites-grid': viewMode === 'grid', 'favorites-list': viewMode === 'list'}"
+            id="favoritesGrid">
+            <div class="product-card" *ngFor="let product of paginatedProducts">
                 <div class="product-actions-top">
                     <button class="product-action-btn remove" title="Eliminar de favoritos"
                         (click)="removeFromFavourites(product.category, product.id)">
@@ -114,7 +115,7 @@
                         Available soon.
                     </div>
                     <div class="product-actions">
-                        <button class="product-btn product-btn-primary">Añadir al carrito</button>
+                        <button class="product-btn product-btn-primary" (click)="addToCart(product.category, product.id, $event)">Add to cart</button>
                         <button class="product-btn product-btn-icon" title="Ver producto"
                             (click)="goToProduct(product)">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
@@ -129,17 +130,16 @@
             </div>
         </div>
 
-        <div class="pagination">
-            <div class="page-item disabled">
+        <div class="pagination" *ngIf="totalPages > 1">
+            <div class="page-item" [class.disabled]="page === 1" (click)="goToPage(page - 1)" *ngIf="page > 1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
             </div>
-            <div class="page-item active">1</div>
-            <div class="page-item">2</div>
-            <div class="page-item">3</div>
-            <div class="page-item">
+            <div class="page-item" *ngFor="let p of [].constructor(totalPages); let i = index"
+                [class.active]="page === i + 1" (click)="goToPage(i + 1)">{{ i + 1 }}</div>
+            <div class="page-item" [class.disabled]="page === 1" (click)="goToPage(page + 1)" *ngIf="page < totalPages">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="9 18 15 12 9 6"></polyline>

@@ -82,7 +82,7 @@ export class UserService {
 
     const userRef = doc(this.firestore, `users/${uid}`);
     return setDoc(userRef, {
-      favourites: {
+      favorites: {
         [category]: {
           [id]: true
         }
@@ -96,11 +96,43 @@ export class UserService {
 
     const userRef = doc(this.firestore, `users/${uid}`);
     return updateDoc(userRef, {
-      [`favourites.${category}.${id}`]: deleteField()
+      [`favorites.${category}.${id}`]: deleteField()
     });
   }
 
   getFavourites() {
+    const uid = this.authService.currentUser?.uid;
+    if (!uid) throw new Error('Usuario no autenticado');
+
+    const userRef = doc(this.firestore, `users/${uid}`);
+    return docData(userRef);
+  }
+
+  addToCart(category: string, id: string) {
+    const uid = this.authService.currentUser?.uid;
+    if (!uid) throw new Error('Usuario no autenticado');
+
+    const userRef = doc(this.firestore, `users/${uid}`);
+    return setDoc(userRef, {
+      cart: {
+        [category]: {
+          [id]: true
+        }
+      }
+    }, { merge: true });
+  }
+
+  removeFromCart(category: string, id: string) {
+    const uid = this.authService.currentUser?.uid;
+    if (!uid) throw new Error('Usuario no autenticado');
+
+    const userRef = doc(this.firestore, `users/${uid}`);
+    return updateDoc(userRef, {
+      [`cart.${category}.${id}`]: deleteField()
+    });
+  }
+
+  getCart() {
     const uid = this.authService.currentUser?.uid;
     if (!uid) throw new Error('Usuario no autenticado');
 

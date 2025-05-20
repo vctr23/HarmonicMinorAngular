@@ -1,0 +1,132 @@
+import { Component, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { UserService } from '../../core/services/user.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../core/services/auth.service';
+import { ProductService } from '../../core/services/product.service';
+import { firstValueFrom } from 'rxjs';
+
+@Component({
+  selector: 'app-shopping-cart-page',
+  imports: [RouterLink, CommonModule, FormsModule],
+  templateUrl: './shopping-cart-page.component.html',
+  styleUrl: './shopping-cart-page.component.css'
+})
+export class ShoppingCartPageComponent implements OnInit {
+
+  locality: string = '';
+  phone: string = '';
+  id: string = '';
+  country: string = '';
+  name: string = '';
+  lastname: string = '';
+  postcode: string = '';
+  street: string = '';
+  errorMessageAddress: string = '';
+
+  cartProducts: any[] = [];
+  loading: boolean = true;
+
+  constructor(private userService: UserService, private authService: AuthService, private productService: ProductService) { }
+
+  ngOnInit(): void {
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    this.authService.currentUser$.subscribe(user => {
+      if (user) {
+        this.userService.getFavourites().subscribe(user => {
+          const cart = user?.['cart'] || [];
+          const requests: Promise<any>[] = [];
+
+          // Recorrer categorías y productos
+          Object.keys(cart).forEach(category => {
+            Object.keys(cart[category]).forEach(productId => {
+              // Llama a tu ProductService para obtener el producto por id y categoría
+              requests.push(
+                firstValueFrom(this.productService.getInstrumentById(productId, category))
+                  .then(product => product ? { ...product, category } : null)
+              );
+            });
+          });
+
+          // Espera a que se resuelvan todas las peticiones
+          Promise.all(requests).then(products => {
+            this.cartProducts = products.filter(Boolean);
+            this.loading = false;
+          });
+        });
+      }
+    });
+
+    this.userService.getUserAddressData().subscribe({
+      next: (userAddressData) => {
+        if (userAddressData) {
+          this.id = userAddressData.id || '';
+          this.country = userAddressData.country || '';
+          this.name = userAddressData.name || '';
+          this.lastname = userAddressData.lastname || '';
+          this.postcode = userAddressData.postcode || '';
+          this.street = userAddressData.street || '';
+          this.locality = userAddressData.locality || '';
+          this.phone = userAddressData.phone || '';
+          this.errorMessageAddress = '';
+        } else {
+          this.errorMessageAddress = 'No address data found';
+        }
+      },
+      error: (err) => {
+        this.errorMessageAddress = 'Error while retrieving user address data:' + err;
+        this.locality = '';
+        this.phone = '';
+        this.id = '';
+        this.country = '';
+        this.name = '';
+        this.lastname = '';
+        this.postcode = '';
+        this.street = '';
+      }
+    })
+  }
+
+  removeFromCart(category: string, id: string) {
+    this.userService.removeFromCart(category, id).then(() => {
+      this.loading = true;
+      this.ngOnInit();
+    });
+  }
+
+  removeAllCart() {
+    this.loading = true;
+    const removes = this.cartProducts.map(product =>
+      this.userService.removeFromCart(product.category, product.id)
+    );
+    Promise.all(removes).then(() => {
+      this.ngOnInit();
+    });
+  }
+
+  priceToNumber(price: any): number | null {
+    if (!price) return null;
+
+    if (typeof price === 'number') return price;
+
+    const cleaned = price.replace(/[^\d.]/g, '');
+    return cleaned ? parseFloat(cleaned) : null;
+  }
+
+  getCartTotal(): number {
+    return this.cartProducts.reduce((total, product) => {
+      const price = this.priceToNumber(product.price);
+      return total + (price ?? 0);
+    }, 0);
+  }
+
+  getTaxes(): number {
+    const total = this.getCartTotal();
+    const taxes = total * 0.21; 
+    return Math.round(taxes * 100) / 100; 
+  }
+}

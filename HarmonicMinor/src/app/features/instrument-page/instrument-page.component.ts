@@ -144,13 +144,11 @@ export class InstrumentPageComponent implements OnInit {
     this.authService.currentUser$.subscribe(user => {
       if (user) {
         this.userService.getFavourites().subscribe(user => {
-          this.favourites = user?.['favourites'] || {};
+          this.favourites = user?.['favorites'] || {};
         });
       }
     });
   }
-
-
 
   setActiveTab(tab: string): void {
     this.activeTab = tab;
@@ -201,5 +199,10 @@ export class InstrumentPageComponent implements OnInit {
     } else {
       this.userService.addToFavourites(category, id);
     }
+  }
+
+  addToCart(category: string, id: string, event: Event) {
+    event.stopPropagation();
+    this.userService.addToCart(category, id);
   }
 }

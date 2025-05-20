@@ -522,6 +522,16 @@
 }
 
 @media (max-width: 768px) {
+
+    .page-header,
+    .list-status,
+    .filters-container,
+    .favorites-grid .product-card,
+    .favorites-list .product-card {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
     .products-slider {
         grid-template-columns: repeat(2, 80%);
     }

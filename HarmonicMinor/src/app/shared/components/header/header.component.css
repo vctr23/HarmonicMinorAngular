@@ -130,7 +130,6 @@ a:hover {
     color: #00BFFF;
 }
 
-.dropdown:focus-within .dropdown-content,
 .dropdown:hover .dropdown-content {
     display: block;
 }

@@ -13,6 +13,7 @@ import { AboutUsPageComponent } from './features/about-us-page/about-us-page.com
 import { CategoryPageComponent } from './features/category-page/category-page.component';
 import { InstrumentPageComponent } from './features/instrument-page/instrument-page.component';
 import { FavouritesPageComponent } from './features/favourites-page/favourites-page.component';
+import { ShoppingCartPageComponent } from './features/shopping-cart-page/shopping-cart-page.component';
 
 export const routes: Routes = [
     { path: '', component: LandingPageComponent },
@@ -20,12 +21,13 @@ export const routes: Routes = [
     { path: 'signin', component: LoginPageComponent },
     { path: 'signup', component: RegisterPageComponent },
     { path: 'profile', component: MenuPageComponent, canActivate: [authGuard]},
-    { path: 'password-recovery', component: RecoverPasswordComponent },
+    { path: 'password-recovery', component: RecoverPasswordComponent, canActivate: [authGuard]},
     { path: 'terms', component: TermsPageComponent },
     { path: 'faqs', component: FAQsPageComponent },
     { path: 'about-us', component: AboutUsPageComponent },
     { path: 'category/:categoryName', component: CategoryPageComponent },
     { path: 'category/:categoryName/:instrumentId', component: InstrumentPageComponent },
-    { path: 'favourites', component: FavouritesPageComponent},
+    { path: 'favourites', component: FavouritesPageComponent, canActivate: [authGuard]},
+    { path: 'cart', component: ShoppingCartPageComponent, canActivate: [authGuard]},
     { path: '**', component: NotFoundPageComponent }
 ];
