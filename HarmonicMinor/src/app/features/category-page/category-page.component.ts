@@ -123,7 +123,7 @@ export class CategoryPageComponent implements OnInit {
   }
 
   isFavourite(category: string, id: string): boolean {
-    return !!this.favourites[category]?.[id];
+     return Array.isArray(this.favourites[category]) && this.favourites[category].includes(id);
   }
 
   toggleFavourite(category: string, id: string, event: Event) {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Firestore, deleteField, doc, docData, setDoc } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { deleteDoc, updateDoc } from 'firebase/firestore';
 import { deleteUser, verifyBeforeUpdateEmail } from 'firebase/auth';
@@ -76,28 +76,44 @@ export class UserService {
   }
 
   // Favourites
-  addToFavourites(category: string, id: string) {
+  async addToFavourites(category: string, id: string) {
     const uid = this.authService.currentUser?.uid;
     if (!uid) throw new Error('Usuario no autenticado');
 
     const userRef = doc(this.firestore, `users/${uid}`);
+    const userSnap = await firstValueFrom(docData(userRef));
+    const favorites = userSnap?.['favorites'] || {};
+    const categoryList: string[] = favorites[category] || [];
+
+    if (!categoryList.includes(id)) {
+      categoryList.push(id);
+    }
+
     return setDoc(userRef, {
       favorites: {
-        [category]: {
-          [id]: true
-        }
+        ...favorites,
+        [category]: categoryList
       }
     }, { merge: true });
   }
 
-  removeFromFavourites(category: string, id: string) {
+  async removeFromFavourites(category: string, id: string) {
     const uid = this.authService.currentUser?.uid;
     if (!uid) throw new Error('Usuario no autenticado');
 
     const userRef = doc(this.firestore, `users/${uid}`);
-    return updateDoc(userRef, {
-      [`favorites.${category}.${id}`]: deleteField()
-    });
+    const userSnap = await firstValueFrom(docData(userRef));
+    const favorites = userSnap?.['favorites'] || {};
+    let categoryList: string[] = favorites[category] || [];
+
+    categoryList = categoryList.filter((itemId: string) => itemId !== id);
+
+    return setDoc(userRef, {
+      favorites: {
+        ...favorites,
+        [category]: categoryList
+      }
+    }, { merge: true });
   }
 
   getFavourites() {
@@ -108,28 +124,52 @@ export class UserService {
     return docData(userRef);
   }
 
-  addToCart(category: string, id: string) {
+  async clearFavourites() {
+    const uid = this.authService.currentUser?.uid;
+    if (!uid) throw new Error('Usuario no autenticado');
+    const userRef = doc(this.firestore, `users/${uid}`);
+    return setDoc(userRef, { favorites: {} }, { merge: true });
+  }
+
+  // Cart
+  async addToCart(category: string, id: string) {
     const uid = this.authService.currentUser?.uid;
     if (!uid) throw new Error('Usuario no autenticado');
 
     const userRef = doc(this.firestore, `users/${uid}`);
+    const userSnap = await firstValueFrom(docData(userRef));
+    const cart = userSnap?.['cart'] || {};
+    const categoryList: string[] = cart[category] || [];
+
+    if (!categoryList.includes(id)) {
+      categoryList.push(id);
+    }
+
     return setDoc(userRef, {
       cart: {
-        [category]: {
-          [id]: true
-        }
+        ...cart,
+        [category]: categoryList
       }
     }, { merge: true });
   }
 
-  removeFromCart(category: string, id: string) {
+  async removeFromCart(category: string, id: string) {
     const uid = this.authService.currentUser?.uid;
     if (!uid) throw new Error('Usuario no autenticado');
 
     const userRef = doc(this.firestore, `users/${uid}`);
-    return updateDoc(userRef, {
-      [`cart.${category}.${id}`]: deleteField()
-    });
+    const userSnap = await firstValueFrom(docData(userRef));
+    const cart = userSnap?.['cart'] || {};
+    let categoryList: string[] = cart[category] || [];
+
+    categoryList = categoryList.filter((itemId: string) => itemId !== id);
+
+    return setDoc(userRef, {
+      cart: {
+        ...cart,
+        [category]: categoryList
+      }
+    }, { merge: true });
   }
 
   getCart() {
@@ -138,6 +178,13 @@ export class UserService {
 
     const userRef = doc(this.firestore, `users/${uid}`);
     return docData(userRef);
+  }
+
+  async clearCart() {
+    const uid = this.authService.currentUser?.uid;
+    if (!uid) throw new Error('Usuario no autenticado');
+    const userRef = doc(this.firestore, `users/${uid}`);
+    return setDoc(userRef, { cart: {} }, { merge: true });
   }
 }
 

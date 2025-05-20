@@ -37,14 +37,12 @@ export class ShoppingCartPageComponent implements OnInit {
 
     this.authService.currentUser$.subscribe(user => {
       if (user) {
-        this.userService.getFavourites().subscribe(user => {
+        this.userService.getCart().subscribe(user => {
           const cart = user?.['cart'] || [];
           const requests: Promise<any>[] = [];
 
-          // Recorrer categorías y productos
           Object.keys(cart).forEach(category => {
-            Object.keys(cart[category]).forEach(productId => {
-              // Llama a tu ProductService para obtener el producto por id y categoría
+            (cart[category] as string[]).forEach(productId => {
               requests.push(
                 firstValueFrom(this.productService.getInstrumentById(productId, category))
                   .then(product => product ? { ...product, category } : null)
@@ -52,7 +50,6 @@ export class ShoppingCartPageComponent implements OnInit {
             });
           });
 
-          // Espera a que se resuelvan todas las peticiones
           Promise.all(requests).then(products => {
             this.cartProducts = products.filter(Boolean);
             this.loading = false;
@@ -100,12 +97,9 @@ export class ShoppingCartPageComponent implements OnInit {
 
   removeAllCart() {
     this.loading = true;
-    const removes = this.cartProducts.map(product =>
-      this.userService.removeFromCart(product.category, product.id)
-    );
-    Promise.all(removes).then(() => {
+    this.userService.clearCart().then(() => {
       this.ngOnInit();
-    });
+    })
   }
 
   priceToNumber(price: any): number | null {
@@ -126,7 +120,7 @@ export class ShoppingCartPageComponent implements OnInit {
 
   getTaxes(): number {
     const total = this.getCartTotal();
-    const taxes = total * 0.21; 
-    return Math.round(taxes * 100) / 100; 
+    const taxes = total * 0.21;
+    return Math.round(taxes * 100) / 100;
   }
 }

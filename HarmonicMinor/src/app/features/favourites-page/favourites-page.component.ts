@@ -30,13 +30,11 @@ export class FavouritesPageComponent implements OnInit {
     this.authService.currentUser$.subscribe(user => {
       if (user) {
         this.userService.getFavourites().subscribe(user => {
-          const favourites = user?.['favorites'] || [];
+          const favourites = user?.['favorites'] || {};
           const requests: Promise<any>[] = [];
 
-          // Recorrer categorías y productos
           Object.keys(favourites).forEach(category => {
-            Object.keys(favourites[category]).forEach(productId => {
-              // Llama a tu ProductService para obtener el producto por id y categoría
+            (favourites[category] as string[]).forEach(productId => {
               requests.push(
                 firstValueFrom(this.productService.getInstrumentById(productId, category))
                   .then(product => product ? { ...product, category } : null)
@@ -44,7 +42,6 @@ export class FavouritesPageComponent implements OnInit {
             });
           });
 
-          // Espera a que se resuelvan todas las peticiones
           Promise.all(requests).then(products => {
             this.favouriteProducts = products.filter(Boolean);
             this.originalOrder = [...this.favouriteProducts];
@@ -64,12 +61,9 @@ export class FavouritesPageComponent implements OnInit {
 
   removeAllFavourites() {
     this.loading = true;
-    const removes = this.favouriteProducts.map(product =>
-      this.userService.removeFromFavourites(product.category, product.id)
-    );
-    Promise.all(removes).then(() => {
+    this.userService.clearFavourites().then(() => {
       this.ngOnInit();
-    });
+    })
   }
 
   goToProduct(instrument: any) {
