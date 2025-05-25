@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Firestore, deleteField, doc, docData, setDoc } from '@angular/fire/firestore';
+import { Firestore, doc, docData, setDoc } from '@angular/fire/firestore';
 import { firstValueFrom, Observable } from 'rxjs';
 import { AuthService } from './auth.service';
-import { deleteDoc, updateDoc } from 'firebase/firestore';
+import { deleteDoc } from 'firebase/firestore';
 import { deleteUser, verifyBeforeUpdateEmail } from 'firebase/auth';
 import { sendPasswordResetEmail } from '@angular/fire/auth';
 

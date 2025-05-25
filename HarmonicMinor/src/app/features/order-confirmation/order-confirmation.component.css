@@ -1,0 +1,42 @@
+.confirmation-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  background: #1C1C1C;
+}
+
+.confirmation-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgb(144, 190, 109, 0.6);
+  padding: 2rem 2.5rem;
+  text-align: center;
+  background: #202020;
+}
+
+.confirmation-title {
+  color: #2e7d32;
+  margin-bottom: 1rem;
+}
+
+.confirmation-message {
+  margin-bottom: 2rem;
+  color: #E4EDF1;
+}
+
+.confirmation-btn {
+  background: linear-gradient(135deg, #00B4D8, #90BE6D);
+  color: #FFFAFA;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.confirmation-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}

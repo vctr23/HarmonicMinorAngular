@@ -14,6 +14,9 @@ import { CategoryPageComponent } from './features/category-page/category-page.co
 import { InstrumentPageComponent } from './features/instrument-page/instrument-page.component';
 import { FavouritesPageComponent } from './features/favourites-page/favourites-page.component';
 import { ShoppingCartPageComponent } from './features/shopping-cart-page/shopping-cart-page.component';
+import { OrderConfirmationComponent } from './features/order-confirmation/order-confirmation.component';
+import path from 'path';
+import { SearchResultsComponent } from './shared/components/search-results/search-results.component';
 
 export const routes: Routes = [
     { path: '', component: LandingPageComponent },
@@ -29,5 +32,7 @@ export const routes: Routes = [
     { path: 'category/:categoryName/:instrumentId', component: InstrumentPageComponent },
     { path: 'favourites', component: FavouritesPageComponent, canActivate: [authGuard]},
     { path: 'cart', component: ShoppingCartPageComponent, canActivate: [authGuard]},
+    { path: 'order-confirmation', component: OrderConfirmationComponent },
+    { path: 'search', component: SearchResultsComponent},
     { path: '**', component: NotFoundPageComponent }
 ];

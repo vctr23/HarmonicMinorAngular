@@ -155,6 +155,9 @@ export class InstrumentPageComponent implements OnInit {
   }
 
   goToProduct(id: string) {
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
     this.router.navigate(['/category', this.categoryName, id]);
   }
 

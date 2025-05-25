@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../core/services/user.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { combineLatest, map } from 'rxjs';
+import { combineLatest, map, take, timeout } from 'rxjs';
 import { Router } from '@angular/router';
 import { ProductService } from '../../core/services/product.service';
+import { table } from 'node:console';
 
 @Component({
   selector: 'app-home-page',
@@ -25,16 +26,18 @@ export class HomePageComponent implements OnInit {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    console.log('Antes de combineLatest');
     combineLatest([
-      this.productService.getGuitarInstruments(),
-      this.productService.getBassInstruments(),
-      this.productService.getDrumInstruments(),
-      this.productService.getPianoInstruments(),
-      this.productService.getDjInstruments(),
-      this.productService.getMicrophoneInstruments(),
-      this.productService.getWindInstruments(),
-      this.productService.getSoftwareInstruments()
+      this.productService.getGuitarInstruments().pipe(take(1)),
+      this.productService.getBassInstruments().pipe(take(1)),
+      this.productService.getDrumInstruments().pipe(take(1)),
+      this.productService.getPianoInstruments().pipe(take(1)),
+      this.productService.getDjInstruments().pipe(take(1)),
+      this.productService.getMicrophoneInstruments().pipe(take(1)),
+      this.productService.getWindInstruments().pipe(take(1)),
+      this.productService.getSoftwareInstruments().pipe(take(1))
     ]).pipe(
+      timeout(10000),
       map(results => {
         const categories = [
           'Guitars', 'Basses', 'Drums', 'Pianos',
@@ -53,6 +56,7 @@ export class HomePageComponent implements OnInit {
       })
     ).subscribe({
       next: (instruments) => {
+        console.log('SSR instruments loaded', instruments);
         this.instruments = instruments;
         this.loading = false;
       },

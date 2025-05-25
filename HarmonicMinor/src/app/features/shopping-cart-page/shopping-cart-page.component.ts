@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { UserService } from '../../core/services/user.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -28,7 +28,7 @@ export class ShoppingCartPageComponent implements OnInit {
   cartProducts: any[] = [];
   loading: boolean = true;
 
-  constructor(private userService: UserService, private authService: AuthService, private productService: ProductService) { }
+  constructor(private userService: UserService, private authService: AuthService, private productService: ProductService, private router: Router) { }
 
   ngOnInit(): void {
     if (typeof window !== 'undefined') {
@@ -86,6 +86,37 @@ export class ShoppingCartPageComponent implements OnInit {
         this.street = '';
       }
     })
+  }
+
+  async checkout() {
+    this.loading = true;
+
+    if(this.cartProducts.length === 0) {
+      this.loading = false;
+      alert('Your cart is empty. Please add products before proceeding to checkout.');
+      return;
+    }
+
+    for (const product of this.cartProducts) {
+      const fresh = await firstValueFrom(
+        this.productService.getInstrumentById(product.id, product.category)
+      );
+
+      if (!fresh || fresh.stock <= 0) {
+        this.loading = false;
+        alert(`The product ${product.name} is not available at the moment.`);
+        return;
+      }
+    }
+
+    for (const product of this.cartProducts) {
+      await this.productService.updateStock(product.id, product.category, -1);
+    }
+
+    await this.userService.clearCart();
+
+    this.loading = false;
+    this.router.navigate(['/order-confirmation']);
   }
 
   removeFromCart(category: string, id: string) {

@@ -237,10 +237,8 @@
     color: #48BB78;
 }
 
-.item-quantity {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+.availability-status.out-of-stock {
+    color: #E53E3E;
 }
 
 .item-total {
@@ -290,8 +288,6 @@
     background-color: #2d2d2d;
     border: 1px solid #333333;
     border-radius: 0.5rem;
-    cursor: pointer;
-    transition: all 0.2s;
     position: relative;
     color: #E4EDF1;
 }
@@ -307,22 +303,10 @@
     margin-bottom: 1rem;
 }
 
-.address-actions {
-    display: flex;
-    gap: 1rem;
-}
-
 .address-action {
-    font-size: 0.75rem;
-    color: #805AD5;
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    transition: color 0.2s;
-}
-
-.address-action:hover {
-    color: #9F7AEA;
+   color: #B794F4;
+   text-decoration: none;
+   
 }
 
 .order-summary {
@@ -392,7 +376,7 @@
     display: block;
     width: 100%;
     padding: 1rem;
-    background-color: #805AD5;
+    background: linear-gradient(135deg, #4776E6, #8E54E9);
     color: #F7FAFC;
     font-weight: 600;
     text-align: center;
@@ -404,7 +388,8 @@
 }
 
 .checkout-btn:hover {
-    background-color: #6B46C1;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .continue-shopping {

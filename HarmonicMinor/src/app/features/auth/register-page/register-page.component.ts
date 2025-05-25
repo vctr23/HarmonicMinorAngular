@@ -21,31 +21,26 @@ export class RegisterPageComponent {
 
 
   register() {
-    // Check if username is empty
     if (!this.username || this.username.trim() === '') {
       this.errorMessage = 'Username is required';
       return;
     }
 
-    // Check if email is empty
     if (this.email.trim() === '') {
       this.errorMessage = 'Email is required';
       return;
     }
 
-    // Check email format
     if (!this.isValidEmail(this.email)) {
       this.errorMessage = 'Invalid email format';
       return;
     }
 
-    // Check if password length is correct
     if (this.password.length < 6 || this.password.length > 12) {
       this.errorMessage = 'Password must be between 6 and 12 characters';
       return;
     }
 
-    // Check if both passwords are the same
     if (this.password !== this.passwordConfirm) {
       this.errorMessage = 'Passwords do not match';
       return;
@@ -53,9 +48,9 @@ export class RegisterPageComponent {
 
     this.authService.register(this.username, this.email, this.password).subscribe({
       next: (credential) => {
-        alert('Registration successful ' + credential);
+        alert('Registration successful ' + credential.user.email);
         this.errorMessage = '';
-        this.router.navigate(['/signin']);
+        this.router.navigate(['/home']);
       },
       error: (err) => {
         this.errorMessage = 'Registration failed: ' + err;
@@ -63,7 +58,6 @@ export class RegisterPageComponent {
     });
   }
 
-  // Function to validate email format via regex
   isValidEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);

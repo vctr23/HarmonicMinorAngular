@@ -40,3 +40,12 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+#Firebase cache
+.firebase
+.firebaserc
+firebase.json
+
+# Local environment variables
+/src/environments/environment.development.ts
+/src/environments/environment.ts

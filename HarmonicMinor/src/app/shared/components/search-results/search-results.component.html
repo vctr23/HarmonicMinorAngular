@@ -1,0 +1,29 @@
+<div class="main-container search-results-container">
+    <div class="page-header">
+        <h1 class="page-title">Search Results</h1>
+        <p class="page-subtitle">Results for: <strong>{{ query }}</strong></p>
+    </div>
+
+    <div *ngIf="loading" class="loading-message">Loading...</div>
+    <div *ngIf="!loading && results.length === 0" class="no-results-message">
+        No products found matching your search.
+    </div>
+
+    <div class="products-grid" *ngIf="!loading && results.length > 0">
+        <div class="product-card" *ngFor="let product of results">
+            <div class="product-image-container">
+                <img [src]="product.imageUrl || product.thumbnailUrl" [alt]="product.name" class="product-image">
+            </div>
+            <div class="product-content">
+                <div class="product-category">{{ product.category }}</div>
+                <h3 class="product-name">{{ product.name }}</h3>
+                <div class="product-brand">{{ product.manufacturer }}</div>
+                <div class="product-footer">
+                    <span class="product-price">{{ priceToNumber(product.price) | currency:'EUR':'symbol':'1.0-0'
+                        }}</span>
+                </div>
+                <button class="btn btn-primary" [routerLink]="['/category', product.category, product.id]">View</button>
+            </div>
+        </div>
+    </div>
+</div>

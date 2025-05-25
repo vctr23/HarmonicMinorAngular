@@ -18,19 +18,16 @@ export class LoginPageComponent {
   constructor(private authService: AuthService, private router: Router) { }
 
   login() {
-    // Check if email is empty
     if (this.email.trim() === '') {
       this.errorMessage = 'Email is required';
       return;
     }
 
-    // Check email format
     if (!this.isValidEmail(this.email)) {
       this.errorMessage = 'Invalid email format';
       return;
     }
 
-    // Check if password length is correct
     if (this.password.length < 6 || this.password.length > 12) {
       this.errorMessage = 'Password must be between 6 and 12 characters';
       return;
@@ -49,8 +46,6 @@ export class LoginPageComponent {
     })
   }
 
-
-  // Function to validate email format via regex
   isValidEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);

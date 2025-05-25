@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { collection, collectionData, doc, docData, Firestore } from '@angular/fire/firestore';
+import { collection, collectionData, doc, docData, Firestore, increment } from '@angular/fire/firestore';
+import { getDoc, updateDoc } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -53,5 +54,17 @@ export class ProductService {
   getInstrumentById(instrumentId: string, category: string): Observable<any> {
     const instrumentRef = doc(this.firestore, `${category.toLowerCase()}/${instrumentId}`);
     return docData(instrumentRef);
+  }
+
+  async updateStock(productId: string, category: string, change: number) {
+    const ref = doc(this.firestore, `${category.toLowerCase()}/${productId}`);
+    const snap = await getDoc(ref);
+    let currentStock = 0;
+    if(snap.exists()) {
+      const data = snap.data();
+      currentStock = parseInt(data['stock'], 10) || 0;
+    }
+    const newStock = (currentStock + change).toString();
+    await updateDoc(ref, { stock: newStock });
   }
 }
